@@ -14,18 +14,17 @@ The Data Tap runs on your AWS Account, whilst BoilingData cloud is used to run a
 
 ## Prerequisites
 
-First, you need a Data Tap on your AWS Account. You can follow these instructions.
-https://github.com/boilingdata/data-taps-template/tree/main/aws_sam_template
+1. First, you need a Data Tap on your AWS Account. You can follow these instructions.
+   https://github.com/boilingdata/data-taps-template/tree/main/aws_sam_template
 
-**NOTE**: Please start with an S3 Express Bucket as it will speed up analytics phase. For using S3 Express (Directory) Buckets, you need to be in AWS region that supports them.
-
-Export fresh tap token as TAP_TOKEN environment variable and TAP_URL env var as the Tap ingestion URL endpoint.
+2. Export fresh tap token as TAP_TOKEN environment variable and TAP_URL env var as the Tap ingestion URL endpoint.
 
 ```shell
+# 1. You will get the TAP URL from the Tap deployment you did in the first step
 export TAP_URL='https://...'
-# If you send to your own Data Tap (sharing user is the as your BoilingData username)
+# 2a. If you send to your own Data Tap (sharing user is the as your BoilingData username)
 export TAP_TOKEN=`bdcli account tap-client-token --disable-spinner | jq -r .bdTapToken`
-# If you send to somebody else's Data Tap, replace "boilingSharingUsername"
+# 2b. If you send to somebody else's Data Tap, replace "boilingSharingUsername"
 export TAP_TOKEN=`bdcli account tap-client-token --sharing-user boilingSharingUsername --disable-spinner | jq -r .bdTapToken`
 ```
 
