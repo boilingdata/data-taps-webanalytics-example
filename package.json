@@ -5,10 +5,11 @@
   "author": "Dan Forsberg <dforsber@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "ncc build -m -o dist/ src/webclient.js",
+    "build": "./scripts/build.sh",
     "open": "./scripts/create_page.sh && open test.html"
   },
   "devDependencies": {
-    "@vercel/ncc": "^0.38.1"
-  }
+    "esbuild": "^0.20.2"
+  },
+  "dependencies": {}
 }

@@ -1,6 +1,3 @@
-const DATA_TAP_URL = "https://3fcfopyadbzm24pe6rypswozyq0wbghs.lambda-url.eu-west-1.on.aws/";
-const TAP_TOKEN =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlRhcFRva2VuIn0.eyJlbWFpbCI6ImRlbW9AYm9pbGluZ2RhdGEuY29tIiwidXNlcm5hbWUiOiIyMTM0NmJmMi02YzMxLTRjYWYtOGU3ZS05ODMyMjA1ZmZkZWUiLCJpYXQiOjE3MTIyOTU1NzksImV4cCI6MTcxMjM4MTk3OSwiYXVkIjpbIjIxMzQ2YmYyLTZjMzEtNGNhZi04ZTdlLTk4MzIyMDVmZmRlZSIsImRlbW9AYm9pbGluZ2RhdGEuY29tIiwiZGVtb0Bib2lsaW5nZGF0YS5jb20iXSwiaXNzIjoiQm9pbGluZ0RhdGEifQ.8-Q_3U5bxDMa7JntqRLNADTgk1X_xURdcYBHxNc3wE4";
 const E_PAGELOAD = "pageload";
 const E_PAGELEAVE = "pageleave";
 const E_KEYDOWN = "keydown";
@@ -12,18 +9,23 @@ let userActivityData = [];
 
 function addUserActivityEvent(eventType, element, data) {
   const el = element ? element.tagName + (element.id ? "#" + element.id : "") : undefined;
-  userActivityData.push({ url, eventType, timestamp: Date.now(), element: el, data });
-  if (eventType == E_PAGELEAVE) sendDataToServer();
+  // NOTE: We stringify data as its schema can vary based on events
+  userActivityData.push({
+    url,
+    eventType,
+    timestamp: Date.now(),
+    data: JSON.stringify({ data, element }),
+  });
+  if (eventType == E_PAGELEAVE || eventType == E_PAGELOAD) sendDataToServer();
 }
 
 async function sendDataToServer() {
   if (userActivityData.length <= 0) return;
-  const method = "POST";
   const body = userActivityData.map((r) => JSON.stringify(r)).join("\n"); // NDJSON
-  const headers = { "Content-Type": "application/x-ndjson", "x-bd-authorization": TAP_TOKEN };
-  const res = await fetch(DATA_TAP_URL, { method, headers, body });
-  if (!res.ok) console.error(res);
   userActivityData = [];
+  const headers = { "Content-Type": "application/x-ndjson", "x-bd-authorization": TAP_TOKEN };
+  const res = await fetch(TAP_URL, { method: "POST", headers, body });
+  if (!res.ok) console.error(res);
 }
 
 function getDeviceInfo() {
