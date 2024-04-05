@@ -1,12 +1,16 @@
-# Browser -- Data Tap -- S3
+# Web Analytics example with Data Taps
 
 <p align="center">
   <img src="img/web-analytics-architecture.png" title="simple architecture">
 </p>
 
-This is an e2e web analytics data collection example.
+This is an e2e web analytics data collection example. This repository contains JS snippet on a HTML page you open with your browser. The JS snippet will collect events like clicks and mouse movements and send them into Data Tap. The Data Tap collects the events and stores into S3.
+
+> Data Tap scales enormously as it is a single AWS Lambda function. [A single AWS Lambda function can scale to 1000 instances in 10s - however, it is hard to reach that level due to the efficient data processing with Data Taps](https://boilingdata.medium.com/seriously-can-aws-lambda-take-streaming-data-d69518708fb6). You can ingest GBs of data per second if you need to with unparalleled cost efficiency. Data Taps is 2-50x more cost efficient than e.g. AWS Firehose due to the optimised C++ AWS Lambda runtime and embedded DuckDB streaming SQL engine. It runs with steady latency on the smallest arm64 AWS Lambda, buffers data and outputs periodically to S3 Bucket. Both AWS Lambda and S3 are 1st tier AWS cloud services with built-in High-Availability and high durability (S3).
 
 The Data Tap runs on your AWS Account, whilst BoilingData cloud is used to run analytics over the collected data.
+
+> You can use any data analytics too to read the produced Parquet files partitioned on S3. BoilingData is special in the sense as it is also AWS Lambda serverless.
 
 ## Prerequisites
 
