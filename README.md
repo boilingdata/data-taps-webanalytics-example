@@ -1,10 +1,9 @@
 [FluentBit](https://github.com/boilingdata/data-taps-fluentbit-example) | [Web Analytics](https://github.com/boilingdata/data-taps-webanalytics-example) | [PostgreSQL CDC](https://github.com/boilingdata/data-taps-postgres-cdc) | [REST API](https://github.com/boilingdata/data-taps-nycopendata-example) | [OpenSearch/ES](https://github.com/boilingdata/data-taps-opensearch-to-s3)
 
-
 # Web Analytics example with Data Taps
 
 <p align="center">
-  <img src="img/web-analytics-architecture.png" title="simple architecture">
+  <img src="img/web-analytics.png" title="simple architecture">
 </p>
 
 This is an e2e web analytics data collection example. This repository contains JS snippet on a HTML page you open with your browser. The JS snippet will collect events like clicks and mouse movements and send them into Data Tap. The Data Tap collects the events and stores into S3.
