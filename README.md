@@ -1,6 +1,6 @@
 [FluentBit](https://github.com/boilingdata/data-taps-fluentbit-example) | [Web Analytics](https://github.com/boilingdata/data-taps-webanalytics-example) | [PostgreSQL CDC](https://github.com/boilingdata/data-taps-postgres-cdc) | [REST API](https://github.com/boilingdata/data-taps-nycopendata-example) | [OpenSearch/ES](https://github.com/boilingdata/data-taps-opensearch-to-s3)
 
-# Web Analytics example with Data Taps
+# Web Analytics --> Data Tap --> S3 Parquet
 
 <p align="center">
   <img src="img/web-analytics.png" title="simple architecture">
